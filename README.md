@@ -1,9 +1,14 @@
 # Run the Project:
 
 1. `git clone https://github.com/RETOVSKEJ/images_app`
-2. `docker compose build`
-3. `docker compose up`
-4. `go to localhost:8000/api/` or any route that you want.
+2. `cd images_app`
+4. `docker compose build`       
+5. `docker compose up`    
+6. `go to localhost:8000/api/` or any route that you want.
+
+IF ERROR `python: can't open file '/app/manage.py': [Errno 2] No such file or directory`:  Make sure to have endline formatting set to LF instead of CRLF (open entrypoint.sh and you will see it in the bottom right corner in Vscode)
+
+
 
 **superuser for testing purposes:** (with Custom Tier added from admin)\
 login: `test`\
