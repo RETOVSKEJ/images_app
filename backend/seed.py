@@ -25,5 +25,5 @@ def create_standard_tiers():
         enterprise = Tier.objects.create(name="Enterprise", original_urls=True, expiring_urls=True)
         enterprise.thumbnail_sizes.add(t_200, t_400)
 
-if __name__ == "__main__":
-    create_standard_tiers()
+# if __name__ == "__main__":
+#     create_standard_tiers()

@@ -24,7 +24,7 @@ from images.views import ServeProtectedMedia
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('images.urls')),
-    re_path(r'^media/(?P<file_path>.*)$', ServeProtectedMedia.as_view()),
+    re_path(r'^media/(?P<file_path>.*)$', ServeProtectedMedia.as_view(), name='media'),
 ]
 
 # if settings.DEBUG:

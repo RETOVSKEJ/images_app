@@ -40,7 +40,7 @@ class ServeProtectedMedia(APIView):
 
 
 class ImageGetFromURL(APIView):
-    permission_classes = (IsAuthenticated, CanFetchExpiringLink)
+    permission_classes = (AllowAny,)
     
     def get(self, request, token, *args, **kwargs):
         try:
@@ -70,19 +70,14 @@ class ImageGetURL(APIView):
 
         
 
-class ImageGetAll(generics.ListAPIView):
+class ImageGetAllCreate(generics.ListCreateAPIView):
     serializer_class = ImageSerializer
     permission_classes = (IsAuthenticated,)
+    queryset = Image.objects.all()
 
     def get_queryset(self):
         profile = UserProfile.objects.get(user=self.request.user)
         return Image.objects.filter(owner=profile).all()
-
-
-class ImagePost(generics.CreateAPIView):
-    serializer_class = ImageSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset = Image.objects.all()
 
     def perform_create(self, serializer):
         instance = serializer.save(owner=self.request.user.userprofile)

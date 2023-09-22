@@ -1,8 +1,10 @@
+import sys
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 UserModel = get_user_model()
 
@@ -31,7 +33,7 @@ def save_user_profile(sender, instance, **kwargs):
 ### OTHER MODELS ###
 
 class ThumbnailSize(models.Model):
-    height = models.PositiveIntegerField()
+    height = models.PositiveIntegerField(unique=True, validators=[MinValueValidator(1), MaxValueValidator(1000)])
 
     def __str__(self):
         return f'{self.height}px'
@@ -46,6 +48,9 @@ class Tier(models.Model):
         return f'{self.name}'
 
 class Image(models.Model):
+    class Meta:
+        ordering = ['-id']
+
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='images')
     file = models.ImageField(upload_to=f'images/')
     

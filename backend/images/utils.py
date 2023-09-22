@@ -47,3 +47,29 @@ def generate_thumbnail(image_instance, height):
         
         filename = f"{height}px.{format.lower()}"
         return ContentFile(thumbnail_io.getvalue(), name=filename)
+    
+
+def helper_generate_image(self):
+        self.client.login(username=self.user.username, password='tester123')
+        is_authenticated = self.client.session['_auth_user_id'] is not None
+        self.assertTrue(is_authenticated, "User is not authenticated")
+        
+        self.assertIsNotNone(self.user.userprofile, "User does not have a profile")
+        self.assertIsNotNone(self.user.userprofile.tier, "User's profile does not have a tier")
+
+        self.client.request()
+        image = ImageFactory(owner=self.user.userprofile)
+
+        image_file = SimpleUploadedFile(
+            image.file.name, 
+            image.file.read(), 
+            content_type="image/jpeg"
+        )
+
+        data = {
+            'file': image_file,
+            "owner": image.owner.pk
+        }
+
+        return  self.client.post(self.list_create_url, data, format='multipart')
+ 
