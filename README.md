@@ -5,12 +5,12 @@
 3. `docker compose up`
 4. `go to localhost:8000/api/` or any route that you want.
 
-**superuser for testing purposes:** (with Custom Tier added from admin)
-login: `test`
-password: `test`
-**staff user without permissions:** (with Basic Tier)
-login: `someUser`
-password: `tester123`
+**superuser for testing purposes:** (with Custom Tier added from admin)\
+login: `test`\
+password: `test`\
+**staff user without permissions:** (with Basic Tier)\
+login: `someUser`\
+password: `tester123`\
 
 
 - _api/_ - **POST** new image && **GET LIST** of user's image
